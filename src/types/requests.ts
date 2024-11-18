@@ -1,0 +1,31 @@
+export interface RequestBookingRequest {
+    companyID: string; // ID of the company to book with
+    resourceID: string; // ID of the resource to book
+    serviceID: string; // ID of the service to book
+    startTime: string; // Start time of the booking in RFC3339 format
+    spots?: number; // Number of spots to book. Required for group services
+    duration?: string; // Duration of the booking in ISO8601 format (eg. PT1H)
+    metaData?: {
+        [key: string]: any;
+    }; // Set of key-value pairs that you can attach to an object.
+    pluginData?: {
+        [key: string]: any;
+    } // Set of key-value pairs that can be used to send data from plugins to the booking handler.
+    customPurchaseDescription?: string; // Optional purchase description that can be passed to payment provider. Otherwise, it will be generated automatically.
+}
+
+export interface CancelBookingRequest {
+    reason: string;
+    notifyCustomer?: boolean;
+}
+
+export interface GetTimesRequest {
+    from: string;  // Start of the time range in RFC3339 format
+    to: string;   // End of the time range in RFC3339 format
+    duration?: string;  // Duration of the timeslot in ISO8601 format (eg. PT1H)
+    resourceIDs?: string[];  // List of resource IDs to get times for
+    spots?: number;  // Number of spots that will be requested. Required for group services
+    tickets?: {
+        [ticketID: string]: number;
+    } // A key-value pair of ticket IDs and the number of spots that will be requested. Required for ticket services
+}

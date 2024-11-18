@@ -1,0 +1,21 @@
+# Source
+src/
+
+# Config files
+.gitignore
+.prettierrc
+.eslintrc
+tsconfig.json
+rollup.config.js
+
+# Tests
+test/
+__tests__/
+*.test.ts
+*.spec.ts
+
+# Development
+node_modules/
+.vscode/
+.idea/
+*.log

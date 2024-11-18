@@ -1,0 +1,10 @@
+.DS_Store
+.cache
+node_modules
+dist
+es
+lib
+*.log
+.vim
+.vscode/
+.idea/
