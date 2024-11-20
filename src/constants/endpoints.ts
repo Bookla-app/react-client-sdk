@@ -8,7 +8,7 @@ export const ENDPOINTS = {
     services: {
         list: { path: '/v1/client/companies/{companyId}/services', auth: 'apiKey' as const },
         get: { path: '/v1/client/companies/{companyId}/services/{id}', auth: 'apiKey' as const },
-        getTimes: { path: '/client/companies/{companyId}/services/{id}/times', auth: 'apiKey' as const },
+        getTimes: { path: '/v1/client/companies/{companyId}/services/{id}/times', auth: 'apiKey' as const },
     },
     resources: {
         list: { path: '/v1/client/companies/{companyId}/resources', auth: 'apiKey' as const },
