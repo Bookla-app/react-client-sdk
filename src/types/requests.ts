@@ -12,6 +12,12 @@ export interface RequestBookingRequest {
         [key: string]: any;
     } // Set of key-value pairs that can be used to send data from plugins to the booking handler.
     customPurchaseDescription?: string; // Optional purchase description that can be passed to payment provider. Otherwise, it will be generated automatically.
+    client?: {
+        id?: string; // Unique identifier for the client
+        firstName?: string; // First name of the client
+        lastName?: string; // Last name of the client
+        email: string; // Email address of the client
+    } // Optional client data. Can be used if you want to create a booking for a guest client without authentication.
 }
 
 export interface CancelBookingRequest {
