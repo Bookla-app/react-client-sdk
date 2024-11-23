@@ -2,7 +2,7 @@ export const ENDPOINTS = {
     bookings: {
         list: { path: '/v1/client/bookings', auth: 'bearer' as const },
         get: { path: '/v1/client/bookings/{id}', auth: 'bearer' as const },
-        create: { path: '/v1/client/bookings', auth: 'bearer' as const },
+        create: { path: '/v1/client/bookings', auth: 'apiKeyOrBearer' as const },
         cancel: { path: '/v1/client/bookings/{id}/cancel', auth: 'bearer' as const },
     },
     services: {
