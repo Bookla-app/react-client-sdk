@@ -44,7 +44,13 @@ export class BookingsService {
             duration: z.string().optional(),
             metaData: z.record(z.unknown()).optional(),
             pluginData: z.record(z.unknown()).optional(),
-            customPurchaseDescription: z.string().optional()
+            customPurchaseDescription: z.string().optional(),
+            client: z.object({
+                id: z.string().optional(),
+                firstName: z.string().optional(),
+                lastName: z.string().optional(),
+                email: z.string().email(),
+            }).optional(),
         });
 
         return schema.parse(data);

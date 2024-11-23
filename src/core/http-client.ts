@@ -184,7 +184,7 @@ export class HttpClient {
             'X-API-Key': this.apiKey,
         };
 
-        if (config.auth === 'bearer' && this.tokens?.accessToken) {
+        if ((config.auth === 'bearer' || config.auth === 'apiKeyOrBearer' ) && this.tokens?.accessToken) {
             headers['Authorization'] = `Bearer ${this.tokens.accessToken}`;
         }
 

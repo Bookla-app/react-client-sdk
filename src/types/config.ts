@@ -13,7 +13,7 @@ export interface SDKConfig {
     onTokenRefreshError?: (error: Error) => void;
 }
 
-export type AuthType = 'none' | 'bearer' | 'apiKey';
+export type AuthType = 'none' | 'bearer' | 'apiKey' | 'apiKeyOrBearer';
 
 export interface EndpointConfig {
     auth: AuthType;
