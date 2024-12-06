@@ -181,11 +181,12 @@ export class HttpClient {
     private getHeaders(config: RequestConfig): Record<string, string> {
         const headers: Record<string, string> = {
             'Content-Type': 'application/json',
-            'X-API-Key': this.apiKey,
         };
 
         if ((config.auth === 'bearer' || config.auth === 'apiKeyOrBearer' ) && this.tokens?.accessToken) {
             headers['Authorization'] = `Bearer ${this.tokens.accessToken}`;
+        } else {
+            headers['X-API-Key'] = this.apiKey;
         }
 
         return headers;
