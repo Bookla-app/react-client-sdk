@@ -1,6 +1,6 @@
 {
   "name": "@bookla-app/react-client-sdk",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "React SDK for Bookla Client API",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",

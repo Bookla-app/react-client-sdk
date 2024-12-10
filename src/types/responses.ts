@@ -9,6 +9,7 @@ export interface ServiceResponse {
   color: string;
   createdAt: string;
   updatedAt: string;
+  timeZone?: string;
   resources?: ResourceResponse[];
 }
 
