@@ -47,3 +47,5 @@ export class BooklaSDK {
 export * from './types/config';
 export * from './types/errors';
 export * from './core/cancel-token';
+export * from './types/responses';
+export * from './types/requests';

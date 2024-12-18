@@ -5,7 +5,7 @@ React SDK for integrating with Bookla's booking system.
 ## Installation
 
 ```bash
-npm install @bookla/react-sdk
+npm install @bookla/react-client-sdk
 ```
 
 ## Usage
