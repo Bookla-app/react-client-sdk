@@ -20,13 +20,13 @@ A TypeScript/JavaScript SDK for integrating with the Bookla Platform API. This S
 ## Installation
 
 ```bash
-npm install @bookla/sdk
+npm install @bookla/react-client-sdk
 ```
 
 ## Initialization
 
 ```typescript
-import { BooklaSDK } from '@bookla/sdk';
+import { BooklaSDK } from '@bookla/react-client-sdk/';
 
 const sdk = new BooklaSDK({
     apiUrl: 'https://eu.bookla.com',
@@ -216,7 +216,7 @@ import {
     BookingResponse,
     ServiceType,
     BookingStatus
-} from '@bookla/sdk';
+} from '@bookla/react-client-sdk';
 ```
 
 ## License
