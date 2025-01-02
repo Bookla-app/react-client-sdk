@@ -72,3 +72,61 @@ export interface BookingResponse {
     } // Set of key-value pairs that you can attach to an object.
     createdAt: string; // Date and time when the object was created in RFC3339 format.
 }
+
+// subscriptions
+export interface SubscriptionContract {
+    id: string;
+    clientID: string;
+    subscriptionID: string;
+    status: string;
+    activeFrom: string;
+    duration: string;
+    limitations: {
+        bookingsCount?: number;
+        daysOfWeek?: number;
+        maxDuration?: string;
+        maxSpotsPerBooking?: number;
+        maxTicketsPerBooking?: Record<string, number>;
+        times?: Array<{ startTime: string; endTime: string }>;
+    };
+    metaData?: Record<string, any>;
+}
+
+export interface SubscriptionCartResponse {
+    expiresAt: string;
+    items: SubscriptionContract[];
+}
+
+export interface PurchaseSubscriptionsResponse {
+    items: SubscriptionContract[];
+    price: number;
+    currency: string;
+    tax: number;
+    taxRate: number;
+    taxInclusive: boolean;
+    expiresAt: string;
+    paymentURL?: string;
+}
+
+export interface CompanySubscription {
+    id: string;
+    title: string;
+    price: number;
+    comparedPrice?: number;
+    currency: string;
+    duration: string;
+    availableFrom: string;
+    availableTo: string;
+    rRule?: string;
+    resourceIDs: string[];
+    serviceIDs: string[];
+    limitations: {
+        bookingsCount?: number;
+        daysOfWeek?: number;
+        maxDuration?: string;
+        maxSpotsPerBooking?: number;
+        maxTicketsPerBooking?: Record<string, number>;
+        times?: Array<{ startTime: string; endTime: string }>;
+    };
+    metaData?: Record<string, any>;
+}

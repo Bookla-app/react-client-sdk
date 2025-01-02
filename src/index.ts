@@ -4,18 +4,21 @@ import { ServicesService } from './services/services';
 import { ResourcesService } from './services/resources';
 import { SDKConfig, AuthTokens } from './types/config';
 import {AuthState} from "./types/auth";
+import {ClientSubscriptionService} from "./services/subscriptions";
 
 export class BooklaSDK {
     private readonly client: HttpClient;
     public bookings: BookingsService;
     public services: ServicesService;
     public resources: ResourcesService;
+    public subscriptions: ClientSubscriptionService;
 
     constructor(config: SDKConfig) {
         this.client = new HttpClient(config);
         this.bookings = new BookingsService(this.client);
         this.services = new ServicesService(this.client);
         this.resources = new ResourcesService(this.client);
+        this.subscriptions = new ClientSubscriptionService(this.client);
     }
 
     setAuthTokens(tokens: AuthTokens) {

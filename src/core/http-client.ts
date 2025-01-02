@@ -240,6 +240,15 @@ export class HttpClient {
         });
     }
 
+    async delete<T>(endpoint: EndpointConfig, options?: RequestOptions): Promise<T> {
+        return this.request<T>({
+            method: 'DELETE',
+            url: endpoint.path,
+            auth: endpoint.auth,
+            ...options
+        });
+    }
+
     createCancelToken(): CancelToken {
         return new CancelToken();
     }

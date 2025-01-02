@@ -35,3 +35,11 @@ export interface GetTimesRequest {
         [ticketID: string]: number;
     } // A key-value pair of ticket IDs and the number of spots that will be requested. Required for ticket services
 }
+
+export interface AddToCartRequest {
+    items: Array<{ subscriptionID: string }>;
+}
+
+export interface RenewPurchasesRequest {
+    ids: string[];
+}
