@@ -29,7 +29,7 @@ npm install @bookla/react-client-sdk
 import { BooklaSDK } from '@bookla/react-client-sdk/';
 
 const sdk = new BooklaSDK({
-    apiUrl: 'https://eu.bookla.com',
+    apiUrl: 'https://us.bookla.com', // or 'https://eu.bookla.com'
     apiKey: 'your-api-key',
     // Optional configurations
     timeout: 30000, // Request timeout in milliseconds
