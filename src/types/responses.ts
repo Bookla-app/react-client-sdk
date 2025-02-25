@@ -10,7 +10,21 @@ export interface ServiceResponse {
   createdAt: string;
   updatedAt: string;
   timeZone?: string;
+  settings?: ServiceSettings;
   resources?: ResourceResponse[];
+}
+
+export interface ServiceSettings {
+    currency?: string;
+    bookingPolicy?: string;
+    duration?: string;
+    timeInterval?: string;
+    bufferBefore?: string;
+    bufferAfter?: string;
+    tax?: {
+        rate: number;
+        inclusive: boolean;
+    };
 }
 
 export interface ResourceResponse {
