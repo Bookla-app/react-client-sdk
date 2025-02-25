@@ -12,6 +12,7 @@ export interface ServiceResponse {
   timeZone?: string;
   settings?: ServiceSettings;
   resources?: ResourceResponse[];
+  tickets?: TicketResponse[];
 }
 
 export interface ServiceSettings {
@@ -35,6 +36,11 @@ export interface ResourceResponse {
   createdAt: string;
   updatedAt: string;
   services?: ServiceResponse[];
+}
+
+export interface TicketResponse {
+    id: string;
+    name: string;
 }
 
 export interface TimesResponse {
