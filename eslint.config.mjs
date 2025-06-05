@@ -1,4 +1,4 @@
-import { typescript } from "@typescript-eslint/eslint-plugin";
+import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 
 export default [
@@ -15,7 +15,7 @@ export default [
             },
         },
         plugins: {
-            "@typescript-eslint": typescript,
+            "@typescript-eslint": typescriptEslint,
         },
         rules: {
             // Your rules here

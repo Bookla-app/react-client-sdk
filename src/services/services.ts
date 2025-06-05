@@ -1,8 +1,8 @@
 import { HttpClient } from '../core/http-client';
 import { z } from 'zod';
 import { RequestOptions } from '../types/config';
-import {ServiceResponse, TimesResponse} from "../types/responses";
-import {GetTimesRequest} from "../types/requests";
+import {ServiceResponse, TimesResponse, DatesResponse} from "../types/responses";
+import {GetTimesRequest, GetDatesRequest} from "../types/requests";
 import {ENDPOINTS} from "../constants/endpoints";
 
 export class ServicesService {
@@ -36,7 +36,34 @@ export class ServicesService {
         }, data, options);
     }
 
+    async getDates(
+        companyId: string,
+        serviceId: string,
+        data: GetDatesRequest,
+        options?: RequestOptions
+    ): Promise<DatesResponse> {
+        this.validateGetDatesRequest(data);
+
+        return this.client.post({
+                ...ENDPOINTS.services.getDates,
+            path: ENDPOINTS.services.getDates.path.replace('{companyId}', companyId).replace('{id}', serviceId),
+        }, data, options);
+    }
+
     private validateGetTimesRequest(data: GetTimesRequest) {
+        const schema = z.object({
+            from: z.string().datetime(),
+            to: z.string().datetime(),
+            duration: z.string().optional(),
+            spots: z.number().optional(),
+            resourceIDs: z.array(z.string()).optional(),
+            tickets: z.record(z.number()).optional()
+        });
+
+        return schema.parse(data);
+    }
+
+    private validateGetDatesRequest(data: GetDatesRequest) {
         const schema = z.object({
             from: z.string().datetime(),
             to: z.string().datetime(),

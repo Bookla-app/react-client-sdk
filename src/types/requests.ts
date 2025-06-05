@@ -36,6 +36,17 @@ export interface GetTimesRequest {
     } // A key-value pair of ticket IDs and the number of spots that will be requested. Required for ticket services
 }
 
+export interface GetDatesRequest {
+    from: string;  // Start of the date range in RFC3339 format
+    to: string;   // End of the date range in RFC3339 format
+    duration?: string;  // Duration of the timeslot in ISO8601 format (eg. PT1H)
+    resourceIDs?: string[];  // List of resource IDs to get dates for
+    spots?: number;  // Number of spots that will be requested. Required for group services
+    tickets?: {
+        [ticketID: string]: number;
+    } // A key-value pair of ticket IDs and the number of spots that will be requested. Required for ticket services
+}
+
 export interface AddToCartRequest {
     items: Array<{ subscriptionID: string }>;
 }

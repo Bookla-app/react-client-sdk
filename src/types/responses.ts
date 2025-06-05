@@ -49,6 +49,13 @@ export interface TimesResponse {
   }
 }
 
+export interface DatesResponse {
+  dates: {
+    [resourceId: string]: string[];
+  };
+  timeZone: string;
+}
+
 export interface TimeSlot {
   startTime: string;
   duration: string;
