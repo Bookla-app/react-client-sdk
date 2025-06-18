@@ -55,3 +55,13 @@ export interface AddToCartRequest {
 export interface RenewPurchasesRequest {
   ids: string[];
 }
+
+export interface CodeValidateRequest {
+  companyID: string;
+  serviceID: string;
+  resourceID: string;
+  startTime: string;
+  duration?: string;
+  spots: number;
+  tickets?: Record<string, number>;
+}
