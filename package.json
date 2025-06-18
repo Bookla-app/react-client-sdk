@@ -1,6 +1,6 @@
 {
   "name": "@bookla-app/react-client-sdk",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "React SDK for Bookla Client API",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
@@ -68,6 +68,7 @@
     "@typescript-eslint/eslint-plugin": "^8.14.0",
     "@typescript-eslint/parser": "^8.14.0",
     "eslint": "^9.15.0",
+    "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "rollup": "^4.24.4",
     "rollup-plugin-typescript2": "^0.36.0",

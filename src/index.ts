@@ -2,6 +2,7 @@ import { HttpClient } from './core/http-client';
 import { BookingsService } from './services/bookings';
 import { ServicesService } from './services/services';
 import { ResourcesService } from './services/resources';
+import { CodesService } from './services/codes';
 import { SDKConfig, AuthTokens } from './types/config';
 import {AuthState} from "./types/auth";
 import {ClientSubscriptionService} from "./services/subscriptions";
@@ -11,6 +12,7 @@ export class BooklaSDK {
     public bookings: BookingsService;
     public services: ServicesService;
     public resources: ResourcesService;
+    public codes: CodesService;
     public subscriptions: ClientSubscriptionService;
 
     constructor(config: SDKConfig) {
@@ -18,6 +20,7 @@ export class BooklaSDK {
         this.bookings = new BookingsService(this.client);
         this.services = new ServicesService(this.client);
         this.resources = new ResourcesService(this.client);
+        this.codes = new CodesService(this.client);
         this.subscriptions = new ClientSubscriptionService(this.client);
     }
 

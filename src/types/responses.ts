@@ -157,3 +157,10 @@ export interface CompanySubscription {
     };
     metaData?: Record<string, any>;
 }
+
+export interface CodeValidateResponse {
+    canApply: boolean;
+    price: number;
+    pluginNameSpace: string;
+    pluginResponse?: Record<string, any>;
+}

@@ -28,5 +28,8 @@ export const ENDPOINTS = {
             renew: { path: '/client/companies/{companyId}/plugins/subscription/client/purchases/renew', auth: 'bearer' as const },
         },
         available: { path: '/client/companies/{companyId}/plugins/subscription/client/subscriptions', auth: 'apiKey' as const },
+    },
+    codes: {
+        validate: { path: '/client/codes/{code}/validate', auth: 'apiKeyOrBearer' as const },
     }
 } as const;
