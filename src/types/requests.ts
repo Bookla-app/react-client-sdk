@@ -18,6 +18,7 @@ export interface RequestBookingRequest {
     lastName?: string; // Last name of the client
     email: string; // Email address of the client
   }; // Optional client data. Can be used if you want to create a booking for a guest client without authentication.
+  code?: string; // Optional code to apply to the booking. This can be used for discounts, subscriptions or promotions.
 }
 
 export interface CancelBookingRequest {
