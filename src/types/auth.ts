@@ -1,5 +1,5 @@
 export interface AuthState {
-    isAuthenticated: boolean;
-    accessToken?: string;
-    expiresAt?: number;
+  isAuthenticated: boolean;
+  accessToken?: string;
+  expiresAt?: number;
 }
