@@ -167,6 +167,7 @@ export interface CompanySubscription {
 export interface CodeValidateResponse {
   canApply: boolean;
   clientID: string;
+  clientEmail: string;
   price: number;
   pluginNameSpace: string;
   pluginResponse?: Record<string, any>;
