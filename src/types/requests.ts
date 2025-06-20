@@ -14,6 +14,7 @@ export interface RequestBookingRequest {
   customPurchaseDescription?: string; // Optional purchase description that can be passed to payment provider. Otherwise, it will be generated automatically.
   client?: {
     id?: string; // Unique identifier for the client
+    booklaID?: string; // Bookla ID of the client (optional). This is used to identify the client in the system. If provided, other client fields will be ignored.
     firstName?: string; // First name of the client
     lastName?: string; // Last name of the client
     email: string; // Email address of the client
