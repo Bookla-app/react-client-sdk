@@ -55,9 +55,10 @@ export class BookingsService {
       client: z
         .object({
           id: z.string().optional(),
+          booklaID: z.string().optional(),
           firstName: z.string().optional(),
           lastName: z.string().optional(),
-          email: z.string().email(),
+          email: z.string().email().optional(),
         })
         .optional(),
     });
