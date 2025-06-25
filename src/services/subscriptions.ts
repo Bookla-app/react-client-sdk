@@ -7,7 +7,7 @@ import {
   SubscriptionContract,
   CompanySubscription,
 } from "../types/responses";
-import { AddToCartRequest, RenewPurchasesRequest } from "../types/requests";
+import {AddToCartRequest, CreateSubscriptionPurchaseRequest, RenewPurchasesRequest} from "../types/requests";
 import { ENDPOINTS } from "../constants/endpoints";
 
 export class ClientSubscriptionService {
@@ -169,4 +169,36 @@ export class ClientSubscriptionService {
       options,
     );
   }
+
+    async createPurchase(
+        companyId: string,
+        data: CreateSubscriptionPurchaseRequest,
+        options?: RequestOptions,
+    ): Promise<PurchaseSubscriptionsResponse> {
+      const schema = z.object({
+          items: z.array(
+            z.object({
+              subscriptionID: z.string().min(1),
+            }),
+          ),
+          client: z
+            .object({
+              id: z.string().optional(),
+              booklaID: z.string().optional(),
+              firstName: z.string().optional(),
+              lastName: z.string().optional(),
+              email: z.string().email().optional(),
+            })
+            .optional(),
+        });
+        const validatedData = schema.parse(data);
+        return this.client.post<PurchaseSubscriptionsResponse>(
+            {
+                ...ENDPOINTS.subscriptions.purchases.create,
+                path: ENDPOINTS.subscriptions.purchases.create.path.replace("{companyId}", companyId),
+            },
+            validatedData,
+            options,
+        );
+    }
 }
