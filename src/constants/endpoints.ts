@@ -71,7 +71,7 @@ export const ENDPOINTS = {
       create: {
         path: "/v1/client/companies/{companyId}/plugins/subscription/client/purchases",
         auth: "apiKeyOrBearer" as const,
-      }
+      },
     },
     available: {
       path: "/v1/client/companies/{companyId}/plugins/subscription/client/subscriptions",
