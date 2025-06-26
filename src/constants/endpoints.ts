@@ -39,42 +39,42 @@ export const ENDPOINTS = {
   subscriptions: {
     cart: {
       get: {
-        path: "/v1/client/companies/{companyId}/plugins/subscription/client/cart",
+        path: "/v1/companies/{companyId}/plugins/subscription/client/cart",
         auth: "bearer" as const,
       },
       add: {
-        path: "/v1/client/companies/{companyId}/plugins/subscription/client/cart",
+        path: "/v1/companies/{companyId}/plugins/subscription/client/cart",
         auth: "bearer" as const,
       },
       remove: {
-        path: "/v1/client/companies/{companyId}/plugins/subscription/client/cart/{itemId}",
+        path: "/v1/companies/{companyId}/plugins/subscription/client/cart/{itemId}",
         auth: "bearer" as const,
       },
       checkout: {
-        path: "/v1/client/companies/{companyId}/plugins/subscription/client/cart/checkout",
+        path: "/v1/companies/{companyId}/plugins/subscription/client/cart/checkout",
         auth: "bearer" as const,
       },
     },
     purchases: {
       list: {
-        path: "/v1/client/companies/{companyId}/plugins/subscription/client/purchases",
+        path: "/v1/companies/{companyId}/plugins/subscription/client/purchases",
         auth: "bearer" as const,
       },
       get: {
-        path: "/v1/client/companies/{companyId}/plugins/subscription/client/purchases/{itemId}",
+        path: "/v1/companies/{companyId}/plugins/subscription/client/purchases/{itemId}",
         auth: "bearer" as const,
       },
       renew: {
-        path: "/v1/client/companies/{companyId}/plugins/subscription/client/purchases/renew",
+        path: "/v1/companies/{companyId}/plugins/subscription/client/purchases/renew",
         auth: "bearer" as const,
       },
       create: {
-        path: "/v1/client/companies/{companyId}/plugins/subscription/client/purchases",
+        path: "/v1/companies/{companyId}/plugins/subscription/client/purchases",
         auth: "apiKeyOrBearer" as const,
       },
     },
     available: {
-      path: "/v1/client/companies/{companyId}/plugins/subscription/client/subscriptions",
+      path: "/v1/companies/{companyId}/plugins/subscription/client/subscriptions",
       auth: "apiKey" as const,
     },
   },
