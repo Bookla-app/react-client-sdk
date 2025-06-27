@@ -21,7 +21,8 @@ export class ClientSubscriptionService {
     const schema = z.object({
       items: z.array(
         z.object({
-          subscriptionID: z.string().min(1), metaData: z.record(z.unknown()).optional(),
+          subscriptionID: z.string().min(1),
+          metaData: z.record(z.unknown()).optional(),
         }),
       ),
     });
@@ -182,8 +183,8 @@ export class ClientSubscriptionService {
     const schema = z.object({
       items: z.array(
         z.object({
-            subscriptionID: z.string().min(1),
-            metaData: z.record(z.unknown()).optional(),
+          subscriptionID: z.string().min(1),
+          metaData: z.record(z.unknown()).optional(),
         }),
       ),
       client: z

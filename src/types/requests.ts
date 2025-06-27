@@ -51,7 +51,7 @@ export interface GetDatesRequest {
 
 export interface AddToCartRequest {
   items: Array<{
-    subscriptionID: string,
+    subscriptionID: string;
     metaData?: {
       [key: string]: any;
     }; // Set of key-value pairs that you can attach to an object.
@@ -64,7 +64,7 @@ export interface RenewPurchasesRequest {
 
 export interface CreateSubscriptionPurchaseRequest {
   items: Array<{
-    subscriptionID: string,
+    subscriptionID: string;
     metaData?: {
       [key: string]: any;
     }; // Set of key-value pairs that you can attach to an object.
