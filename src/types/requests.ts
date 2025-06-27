@@ -50,7 +50,12 @@ export interface GetDatesRequest {
 }
 
 export interface AddToCartRequest {
-  items: Array<{ subscriptionID: string }>;
+  items: Array<{
+    subscriptionID: string,
+    metaData?: {
+      [key: string]: any;
+    }; // Set of key-value pairs that you can attach to an object.
+  }>;
 }
 
 export interface RenewPurchasesRequest {
@@ -58,7 +63,12 @@ export interface RenewPurchasesRequest {
 }
 
 export interface CreateSubscriptionPurchaseRequest {
-  items: Array<{ subscriptionID: string }>;
+  items: Array<{
+    subscriptionID: string,
+    metaData?: {
+      [key: string]: any;
+    }; // Set of key-value pairs that you can attach to an object.
+  }>;
   client?: {
     id?: string; // Unique identifier for the client
     booklaID?: string; // Bookla ID of the client (optional). This is used to identify the client in the system. If provided, other client fields will be ignored.
