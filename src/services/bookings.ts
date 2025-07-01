@@ -60,7 +60,7 @@ export class BookingsService {
           lastName: z.string().optional(),
           email: z.string().email().optional(),
         })
-        .optional(),
+        .nullish(),
     });
 
     return schema.parse(data);

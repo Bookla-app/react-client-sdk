@@ -195,7 +195,7 @@ export class ClientSubscriptionService {
           lastName: z.string().optional(),
           email: z.string().email().optional(),
         })
-        .optional(),
+        .nullish(),
     });
     const validatedData = schema.parse(data);
     return this.client.post<PurchaseSubscriptionsResponse>(
