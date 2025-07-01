@@ -46,18 +46,18 @@ export class HttpClient {
 
   async isAuthenticated(): Promise<AuthState> {
     if (this.tokens?.accessToken) {
-        const expiresAt = Date.parse(this.tokens.expiresAt);
+      const expiresAt = Date.parse(this.tokens.expiresAt);
       if (expiresAt < Date.now()) {
-          const refreshed = await this.refreshToken();
-          if (!refreshed) {
-            this.clearAuth();
-            return { isAuthenticated: false };
-          }
-          return {
-            isAuthenticated: true,
-            accessToken: this.tokens.accessToken,
-            expiresAt: Date.parse(this.tokens.expiresAt),
-          };
+        const refreshed = await this.refreshToken();
+        if (!refreshed) {
+          this.clearAuth();
+          return { isAuthenticated: false };
+        }
+        return {
+          isAuthenticated: true,
+          accessToken: this.tokens.accessToken,
+          expiresAt: Date.parse(this.tokens.expiresAt),
+        };
       }
 
       return {
@@ -234,13 +234,16 @@ export class HttpClient {
         return false;
       }
 
-      const response = await fetch(`${this.baseURL}${ENDPOINTS.auth.refresh.path}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${this.tokens.refreshToken}`,
+      const response = await fetch(
+        `${this.baseURL}${ENDPOINTS.auth.refresh.path}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${this.tokens.refreshToken}`,
+          },
         },
-      });
+      );
 
       if (!response.ok) {
         return false;
