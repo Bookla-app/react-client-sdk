@@ -84,4 +84,10 @@ export const ENDPOINTS = {
       auth: "apiKeyOrBearer" as const,
     },
   },
+  auth: {
+    refresh: {
+      path: "/client/auth/refresh",
+      auth: "bearer" as const,
+    },
+  },
 } as const;

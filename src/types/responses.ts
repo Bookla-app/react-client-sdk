@@ -172,3 +172,9 @@ export interface CodeValidateResponse {
   pluginNameSpace: string;
   pluginResponse?: Record<string, any>;
 }
+
+export interface ClientAuthResponse {
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: string;
+}

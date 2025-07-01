@@ -11,6 +11,8 @@ import { BooklaError } from "../types/errors";
 import { CancelToken } from "./cancel-token";
 import { AuthState } from "../types/auth";
 import { storage } from "../utils/storage";
+import { ClientAuthResponse } from "../types/responses";
+import { ENDPOINTS } from "../constants/endpoints";
 
 export class HttpClient {
   private readonly baseURL: string;
@@ -42,8 +44,22 @@ export class HttpClient {
     this.saveTokensToStorage(tokens);
   }
 
-  isAuthenticated(): AuthState {
+  async isAuthenticated(): Promise<AuthState> {
     if (this.tokens?.accessToken) {
+        const expiresAt = Date.parse(this.tokens.expiresAt);
+      if (expiresAt < Date.now()) {
+          const refreshed = await this.refreshToken();
+          if (!refreshed) {
+            this.clearAuth();
+            return { isAuthenticated: false };
+          }
+          return {
+            isAuthenticated: true,
+            accessToken: this.tokens.accessToken,
+            expiresAt: Date.parse(this.tokens.expiresAt),
+          };
+      }
+
       return {
         isAuthenticated: true,
         accessToken: this.tokens.accessToken,
@@ -57,8 +73,16 @@ export class HttpClient {
       this.tokens = storedTokens; // Update current tokens
       const expiresAt = Date.parse(storedTokens.expiresAt);
       if (expiresAt < Date.now()) {
-        this.clearAuth();
-        return { isAuthenticated: false };
+        const refreshed = await this.refreshToken();
+        if (!refreshed) {
+          this.clearAuth();
+          return { isAuthenticated: false };
+        }
+        return {
+          isAuthenticated: true,
+          accessToken: this.tokens.accessToken,
+          expiresAt: Date.parse(this.tokens.expiresAt),
+        };
       }
 
       return {
@@ -210,22 +234,19 @@ export class HttpClient {
         return false;
       }
 
-      const response = await fetch(`${this.baseURL}/auth/refresh`, {
+      const response = await fetch(`${this.baseURL}${ENDPOINTS.auth.refresh.path}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-API-Key": this.apiKey,
+          "Authorization": `Bearer ${this.tokens.refreshToken}`,
         },
-        body: JSON.stringify({
-          refreshToken: this.tokens.refreshToken,
-        }),
       });
 
       if (!response.ok) {
         return false;
       }
 
-      const newTokens = await response.json();
+      const newTokens: ClientAuthResponse = await response.json();
       this.setTokens(newTokens);
       return true;
     } catch (error) {

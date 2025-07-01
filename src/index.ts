@@ -28,7 +28,7 @@ export class BooklaSDK {
     this.client.setTokens(tokens);
   }
 
-  isAuthenticated(): AuthState {
+  async isAuthenticated(): Promise<AuthState> {
     return this.client.isAuthenticated();
   }
 
