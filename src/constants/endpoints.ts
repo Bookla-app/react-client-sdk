@@ -86,7 +86,7 @@ export const ENDPOINTS = {
   },
   auth: {
     refresh: {
-      path: "/client/auth/refresh",
+      path: "/v1/client/auth/refresh",
       auth: "bearer" as const,
     },
   },
