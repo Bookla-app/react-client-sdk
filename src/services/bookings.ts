@@ -51,6 +51,7 @@ export class BookingsService {
       duration: z.string().optional(),
       metaData: z.record(z.unknown()).optional(),
       pluginData: z.record(z.unknown()).optional(),
+      tickets: z.record(z.number()).optional(),
       customPurchaseDescription: z.string().optional(),
       client: z
         .object({
