@@ -6,7 +6,7 @@ export interface RequestBookingRequest {
   spots?: number; // Number of spots to book. Required for group services
   duration?: string; // Duration of the booking in ISO8601 format (eg. PT1H)
   tickets?: {
-      [ticketID: string]: number;
+    [ticketID: string]: number;
   }; // A key-value pair of ticket IDs and the number of spots to book. Required for ticket services
   metaData?: {
     [key: string]: any;
