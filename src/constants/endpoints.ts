@@ -78,6 +78,26 @@ export const ENDPOINTS = {
       auth: "apiKey" as const,
     },
   },
+  giftCards: {
+    purchases: {
+      list: {
+        path: "/v1/companies/{companyId}/plugins/giftcards/client/orders",
+        auth: "bearer" as const,
+      },
+      get: {
+        path: "/v1/companies/{companyId}/plugins/giftcards/client/orders/{itemId}",
+        auth: "bearer" as const,
+      },
+      create: {
+        path: "/v1/companies/{companyId}/plugins/giftcards/client/orders",
+        auth: "apiKeyOrBearer" as const,
+      },
+    },
+    available: {
+      path: "/v1/companies/{companyId}/plugins/giftcards/client/giftcards",
+      auth: "apiKey" as const,
+    },
+  },
   codes: {
     validate: {
       path: "/v1/client/codes/{code}/validate",

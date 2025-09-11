@@ -6,6 +6,7 @@ import { CodesService } from "./services/codes";
 import { SDKConfig, AuthTokens } from "./types/config";
 import { AuthState } from "./types/auth";
 import { ClientSubscriptionService } from "./services/subscriptions";
+import { ClientGiftCardsService } from "./services/giftcards";
 
 export class BooklaSDK {
   private readonly client: HttpClient;
@@ -14,6 +15,7 @@ export class BooklaSDK {
   public resources: ResourcesService;
   public codes: CodesService;
   public subscriptions: ClientSubscriptionService;
+  public giftCards: ClientGiftCardsService;
 
   constructor(config: SDKConfig) {
     this.client = new HttpClient(config);
@@ -22,6 +24,7 @@ export class BooklaSDK {
     this.resources = new ResourcesService(this.client);
     this.codes = new CodesService(this.client);
     this.subscriptions = new ClientSubscriptionService(this.client);
+    this.giftCards = new ClientGiftCardsService(this.client);
   }
 
   setAuthTokens(tokens: AuthTokens) {

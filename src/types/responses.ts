@@ -178,3 +178,58 @@ export interface ClientAuthResponse {
   refreshToken: string;
   expiresAt: string;
 }
+
+// Gift Cards
+export interface CompanyGiftCard {
+    id: string;
+    title: string;
+    amount: number; // in cents
+    currency: string; // ISO 4217 currency code
+    taxRate: number; // e.g. 20 for 20%
+    taxInclusive: boolean; // true if tax is included in the amount
+    availableFrom: string; // RFC3339 format
+    availableTo?: string; // RFC3339 format
+    validityDuration: string; // ISO 8601 duration format, e.g. P365D for 1 year
+    metaData?: Record<string, any>;
+}
+
+export interface PurchaseGiftCardResponse {
+    item: GiftCardContract;
+    expiresAt: string; // RFC3339 format
+    price: number; // in cents
+    currency: string; // ISO 4217 currency code
+    tax: number; // in cents
+    taxRate: number; // e.g. 20 for 20%
+    taxInclusive: boolean; // true if tax is included in the price
+    paymentURL: string; // URL to complete the payment
+}
+
+export interface GiftCardUsage {
+  id: string; // Unique identifier for the usage
+  createdAt: string; // RFC3339 format
+  companyID: string; // ID of the company
+  purchaseID: string; // ID of the gift card purchase
+  giftCardID: string; // ID of the gift card
+  clientID: string; // ID of the client who used the gift card
+  status: string; // e.g. used, cancelled
+  amount: number; // in cents
+  currency: string; // ISO 4217 currency code
+  reservationID?: string; // ID of the reservation associated with the usage, if any
+  metaData?: Record<string, any>;
+}
+
+export interface GiftCardContract {
+  id: string; // Unique identifier for the purchase
+  createdAt: string; // RFC3339 format
+  companyID: string; // ID of the company
+  giftCardID: string; // ID of the gift card
+  giftCardName: string; // Name of the gift card
+  clientID: string; // ID of the client who purchased the gift card
+  code: string; // Unique code for the gift card
+  amount: number; // in cents
+  currency: string; // ISO 4217 currency code
+  validUntil?: string; // RFC3339 format
+  status: string; // e.g. active, redeemed, expired, cancelled
+  usages?: GiftCardUsage[]; // List of usages of the gift card
+  metaData?: Record<string, any>;
+}
