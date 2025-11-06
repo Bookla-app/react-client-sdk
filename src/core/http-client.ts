@@ -26,7 +26,10 @@ export class HttpClient {
   private pendingRequests = new Map<string, Promise<any>>();
 
   // Development warnings: tracks request patterns to detect potential issues
-  private requestHistory = new Map<string, { count: number; lastTime: number; times: number[] }>();
+  private requestHistory = new Map<
+    string,
+    { count: number; lastTime: number; times: number[] }
+  >();
 
   public interceptors = {
     request: new InterceptorManager(),
@@ -155,13 +158,14 @@ export class HttpClient {
     this.requestHistory.set(requestKey, history);
 
     // Warning 1: Rapid identical requests (potential infinite loop)
-    const timeSinceLastRequest = history.lastTime - (history.times[history.times.length - 2] || 0);
+    const timeSinceLastRequest =
+      history.lastTime - (history.times[history.times.length - 2] || 0);
     if (timeSinceLastRequest < 100 && history.times.length > 1) {
       console.warn(
         `[Bookla SDK] ⚠️  Rapid identical request detected (${timeSinceLastRequest}ms since last)`,
-        `\n  Request: ${requestKey.split(':')[0]} ${requestKey.split(':')[1]}`,
+        `\n  Request: ${requestKey.split(":")[0]} ${requestKey.split(":")[1]}`,
         `\n  This might indicate an infinite loop in your React component.`,
-        `\n  Check useEffect dependencies or use the SDK's cancelToken feature.`
+        `\n  Check useEffect dependencies or use the SDK's cancelToken feature.`,
       );
     }
 
@@ -170,8 +174,8 @@ export class HttpClient {
     if (recentRequests.length > 10) {
       console.warn(
         `[Bookla SDK] ⚠️  High request frequency detected: ${recentRequests.length} requests in 1 second`,
-        `\n  Request: ${requestKey.split(':')[0]} ${requestKey.split(':')[1]}`,
-        `\n  Consider implementing proper request cancellation or debouncing in your application.`
+        `\n  Request: ${requestKey.split(":")[0]} ${requestKey.split(":")[1]}`,
+        `\n  Consider implementing proper request cancellation or debouncing in your application.`,
       );
     }
 
@@ -179,8 +183,8 @@ export class HttpClient {
     if (history.times.length > 50) {
       console.warn(
         `[Bookla SDK] ⚠️  Excessive identical requests: ${history.times.length} requests in 10 seconds`,
-        `\n  Request: ${requestKey.split(':')[0]} ${requestKey.split(':')[1]}`,
-        `\n  This is likely a bug in your application code.`
+        `\n  Request: ${requestKey.split(":")[0]} ${requestKey.split(":")[1]}`,
+        `\n  This is likely a bug in your application code.`,
       );
     }
   }
@@ -202,7 +206,7 @@ export class HttpClient {
       if (this.debug) {
         console.log(
           `[Bookla SDK] 🔄 Deduplicating request: ${config.method} ${config.url}`,
-          "\n  Returning existing in-flight request instead of creating a duplicate."
+          "\n  Returning existing in-flight request instead of creating a duplicate.",
         );
       }
       return pendingRequest;

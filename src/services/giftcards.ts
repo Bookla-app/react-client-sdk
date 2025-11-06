@@ -2,13 +2,11 @@ import { HttpClient } from "../core/http-client";
 import { z } from "zod";
 import { RequestOptions } from "../types/config";
 import {
-    PurchaseGiftCardResponse,
-    GiftCardContract,
-    CompanyGiftCard,
+  PurchaseGiftCardResponse,
+  GiftCardContract,
+  CompanyGiftCard,
 } from "../types/responses";
-import {
-  CreatGiftCardPurchaseRequest,
-} from "../types/requests";
+import { CreatGiftCardPurchaseRequest } from "../types/requests";
 import { ENDPOINTS } from "../constants/endpoints";
 
 export class ClientGiftCardsService {

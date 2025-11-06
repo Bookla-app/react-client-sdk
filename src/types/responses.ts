@@ -181,27 +181,27 @@ export interface ClientAuthResponse {
 
 // Gift Cards
 export interface CompanyGiftCard {
-    id: string;
-    title: string;
-    amount: number; // in cents
-    currency: string; // ISO 4217 currency code
-    taxRate: number; // e.g. 20 for 20%
-    taxInclusive: boolean; // true if tax is included in the amount
-    availableFrom: string; // RFC3339 format
-    availableTo?: string; // RFC3339 format
-    validityDuration: string; // ISO 8601 duration format, e.g. P365D for 1 year
-    metaData?: Record<string, any>;
+  id: string;
+  title: string;
+  amount: number; // in cents
+  currency: string; // ISO 4217 currency code
+  taxRate: number; // e.g. 20 for 20%
+  taxInclusive: boolean; // true if tax is included in the amount
+  availableFrom: string; // RFC3339 format
+  availableTo?: string; // RFC3339 format
+  validityDuration: string; // ISO 8601 duration format, e.g. P365D for 1 year
+  metaData?: Record<string, any>;
 }
 
 export interface PurchaseGiftCardResponse {
-    item: GiftCardContract;
-    expiresAt: string; // RFC3339 format
-    price: number; // in cents
-    currency: string; // ISO 4217 currency code
-    tax: number; // in cents
-    taxRate: number; // e.g. 20 for 20%
-    taxInclusive: boolean; // true if tax is included in the price
-    paymentURL: string; // URL to complete the payment
+  item: GiftCardContract;
+  expiresAt: string; // RFC3339 format
+  price: number; // in cents
+  currency: string; // ISO 4217 currency code
+  tax: number; // in cents
+  taxRate: number; // e.g. 20 for 20%
+  taxInclusive: boolean; // true if tax is included in the price
+  paymentURL: string; // URL to complete the payment
 }
 
 export interface GiftCardUsage {
