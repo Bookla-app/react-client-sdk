@@ -233,3 +233,63 @@ export interface GiftCardContract {
   usages?: GiftCardUsage[]; // List of usages of the gift card
   metaData?: Record<string, any>;
 }
+
+// Addons
+export interface ClientAddonResponse {
+  id: string;
+  name: string;
+  description: string;
+  priceCents: number;
+  currency: string;
+  taxPercent: number;
+  taxInclusive: boolean;
+  minQuantity: number;
+  maxQuantity: number;
+  sortOrder: number;
+  isRequired: boolean;
+  metadata?: Record<string, any>;
+}
+
+export interface ClientAddonGroupResponse {
+  id: string;
+  name: string;
+  description: string;
+  sortOrder: number;
+  isRequired: boolean;
+  members: ClientAddonResponse[];
+}
+
+export interface ClientServiceAddonItem {
+  type: "addon" | "group";
+  serviceAddonId: string;
+  isRequired: boolean;
+  sortOrder: number;
+  addon?: ClientAddonResponse;
+  group?: ClientAddonGroupResponse;
+}
+
+export interface DiscoverAddonsResponse {
+  items: ClientServiceAddonItem[];
+}
+
+export interface ValidatedAddonItem {
+  addonId: string;
+  addonName: string;
+  quantity: number;
+  unitPrice: number;
+  subtotal: number;
+  tax: number;
+  total: number;
+  taxPercent: number;
+  taxInclusive: boolean;
+}
+
+export interface ValidateAddonsResponse {
+  valid: boolean;
+  errors?: string[];
+  subtotal: number;
+  tax: number;
+  total: number;
+  currency: string;
+  items: ValidatedAddonItem[];
+}

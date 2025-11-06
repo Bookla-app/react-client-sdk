@@ -104,3 +104,16 @@ export interface CreatGiftCardPurchaseRequest {
     email: string; // Email address of the client
   }; // Optional client data. Can be used if you want to purchase a subscription for a guest client without authentication.
 }
+
+// Addons
+export interface ClientAddonSelection {
+  addonID: string;
+  quantity: number;
+  metadata?: {
+    [key: string]: any;
+  };
+}
+
+export interface ValidateAddonsRequest {
+  addons: ClientAddonSelection[];
+}

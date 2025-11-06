@@ -110,4 +110,14 @@ export const ENDPOINTS = {
       auth: "bearer" as const,
     },
   },
+  addons: {
+    discover: {
+      path: "/v1/companies/{companyId}/plugins/addons/client/services/{serviceId}",
+      auth: "apiKey" as const,
+    },
+    validate: {
+      path: "/v1/companies/{companyId}/plugins/addons/client/services/{serviceId}/validate",
+      auth: "apiKey" as const,
+    },
+  },
 } as const;
