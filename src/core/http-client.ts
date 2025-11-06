@@ -22,6 +22,12 @@ export class HttpClient {
   private readonly debug: boolean;
   private tokens: AuthTokens | null = null;
 
+  // Request deduplication: tracks in-flight requests to prevent duplicates
+  private pendingRequests = new Map<string, Promise<any>>();
+
+  // Development warnings: tracks request patterns to detect potential issues
+  private requestHistory = new Map<string, { count: number; lastTime: number; times: number[] }>();
+
   public interceptors = {
     request: new InterceptorManager(),
     response: new InterceptorManager(),
@@ -117,11 +123,112 @@ export class HttpClient {
     }
   }
 
+  /**
+   * Generates a unique key for request deduplication
+   * Format: METHOD:URL:BODY_HASH
+   */
+  private getRequestKey(config: RequestConfig): string {
+    const body = config.data ? JSON.stringify(config.data) : "";
+    return `${config.method}:${config.url}:${body}`;
+  }
+
+  /**
+   * Tracks request patterns and warns about potential issues in debug mode
+   */
+  private trackRequest(requestKey: string): void {
+    if (!this.debug) return;
+
+    const now = Date.now();
+    const history = this.requestHistory.get(requestKey) || {
+      count: 0,
+      lastTime: 0,
+      times: [],
+    };
+
+    history.count++;
+    history.times.push(now);
+    history.lastTime = now;
+
+    // Keep only last 10 seconds of history
+    history.times = history.times.filter((time) => now - time < 10000);
+
+    this.requestHistory.set(requestKey, history);
+
+    // Warning 1: Rapid identical requests (potential infinite loop)
+    const timeSinceLastRequest = history.lastTime - (history.times[history.times.length - 2] || 0);
+    if (timeSinceLastRequest < 100 && history.times.length > 1) {
+      console.warn(
+        `[Bookla SDK] ⚠️  Rapid identical request detected (${timeSinceLastRequest}ms since last)`,
+        `\n  Request: ${requestKey.split(':')[0]} ${requestKey.split(':')[1]}`,
+        `\n  This might indicate an infinite loop in your React component.`,
+        `\n  Check useEffect dependencies or use the SDK's cancelToken feature.`
+      );
+    }
+
+    // Warning 2: High frequency requests (> 10 in 1 second)
+    const recentRequests = history.times.filter((time) => now - time < 1000);
+    if (recentRequests.length > 10) {
+      console.warn(
+        `[Bookla SDK] ⚠️  High request frequency detected: ${recentRequests.length} requests in 1 second`,
+        `\n  Request: ${requestKey.split(':')[0]} ${requestKey.split(':')[1]}`,
+        `\n  Consider implementing proper request cancellation or debouncing in your application.`
+      );
+    }
+
+    // Warning 3: Many identical requests over time (> 50 in 10 seconds)
+    if (history.times.length > 50) {
+      console.warn(
+        `[Bookla SDK] ⚠️  Excessive identical requests: ${history.times.length} requests in 10 seconds`,
+        `\n  Request: ${requestKey.split(':')[0]} ${requestKey.split(':')[1]}`,
+        `\n  This is likely a bug in your application code.`
+      );
+    }
+  }
+
   private async request<T>(
     config: RequestConfig & { auth: AuthType },
   ): Promise<T> {
     this.validateAuth(config);
 
+    // Generate unique key for this request
+    const requestKey = this.getRequestKey(config);
+
+    // Track request patterns for development warnings
+    this.trackRequest(requestKey);
+
+    // Request deduplication: if identical request is in-flight, return existing promise
+    const pendingRequest = this.pendingRequests.get(requestKey);
+    if (pendingRequest) {
+      if (this.debug) {
+        console.log(
+          `[Bookla SDK] 🔄 Deduplicating request: ${config.method} ${config.url}`,
+          "\n  Returning existing in-flight request instead of creating a duplicate."
+        );
+      }
+      return pendingRequest;
+    }
+
+    // Create new request promise
+    const requestPromise = this.executeRequest<T>(config);
+
+    // Store in pending requests
+    this.pendingRequests.set(requestKey, requestPromise);
+
+    // Clean up when done (success or failure)
+    requestPromise
+      .then(() => {
+        this.pendingRequests.delete(requestKey);
+      })
+      .catch(() => {
+        this.pendingRequests.delete(requestKey);
+      });
+
+    return requestPromise;
+  }
+
+  private async executeRequest<T>(
+    config: RequestConfig & { auth: AuthType },
+  ): Promise<T> {
     let attempt = 0;
 
     while (attempt < this.retry.maxAttempts) {
