@@ -247,6 +247,9 @@ export interface ClientAddonResponse {
   maxQuantity: number;
   sortOrder: number;
   isRequired: boolean;
+  durationMultiplierEnabled?: boolean;
+  durationMultiplierUnit?: string;
+  durationMultiplierRounding?: "up" | "down" | "nearest";
   metadata?: Record<string, any>;
 }
 
