@@ -93,6 +93,7 @@ export interface CodeValidateRequest {
 
 export interface CreatGiftCardPurchaseRequest {
   giftCardID: string;
+  amount?: number; // used for gift cards with custom amount
   metaData?: {
     [key: string]: any;
   }; // Set of key-value pairs that you can attach to an object.

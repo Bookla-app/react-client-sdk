@@ -184,6 +184,9 @@ export interface CompanyGiftCard {
   id: string;
   title: string;
   amount: number; // in cents
+  amountType: "fixed" | "custom";
+  minAmount?: number; // in cents for custom amount gift cards
+  maxAmount?: number; // in cents for custom amount gift cards
   currency: string; // ISO 4217 currency code
   taxRate: number; // e.g. 20 for 20%
   taxInclusive: boolean; // true if tax is included in the amount
