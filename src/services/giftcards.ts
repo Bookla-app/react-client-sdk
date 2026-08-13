@@ -67,6 +67,7 @@ export class ClientGiftCardsService {
   ): Promise<PurchaseGiftCardResponse> {
     const schema = z.object({
       giftCardID: z.string().min(1),
+      amount: z.number().optional(),
       metaData: z.record(z.unknown()).optional(),
       client: z
         .object({
